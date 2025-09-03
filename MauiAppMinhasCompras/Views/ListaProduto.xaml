@@ -2,11 +2,41 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppMinhasCompras.Views.ListaProduto"
-             Title="ListaProduto">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Lista de Produtos">
+
+    <VerticalStackLayout Padding="10">
+
+        <SearchBar x:Name="txt_search"
+                   Placeholder="Busca de produtos"
+                   TextChanged="txt_search_TextChanged" />
+
+        <ListView x:Name="lst_nome" Margin="0,10,0,0" ItemSelected="lst_nome_ItemSelected">
+            <ListView.Header>
+                <Grid ColumnDefinitions="*,*,*,*,*,*">
+                    <Label Grid.Column="1" Text="ID" FontAttributes="Bold"/>
+                    <Label Grid.Column="2" Text="Descrição" FontAttributes="Bold"/>
+                    <Label Grid.Column="3" Text="Preço" FontAttributes="Bold"/>
+                    <Label Grid.Column="4" Text="Qnt" FontAttributes="Bold"/>
+                    <Label Grid.Column="5" Text="Total" FontAttributes="Bold"/>
+                </Grid>
+            </ListView.Header>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Remover" Clicked="MenuItem_Clicked"/>
+                        </ViewCell.ContextActions>
+                        <Grid ColumnDefinitions="*,*,*,*,*,*">
+                            <Label Grid.Column="1" Text="{Binding Id}" />
+                            <Label Grid.Column="2" Text="{Binding Descricao}" />
+                            <Label Grid.Column="3" Text="{Binding Preco}" />
+                            <Label Grid.Column="4" Text="{Binding Qnt}" />
+                            <Label Grid.Column="5" Text="{Binding Total}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>
